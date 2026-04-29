@@ -1,11 +1,10 @@
 
-
-function setItem<T>(key:string,value:T):void{
+export function setItem<T>(key:string,value:T):void{
     localStorage.setItem(key,JSON.stringify(value))
 
 }
 
-function getItem<T>(key:string,value:T):T|null{
+export function getItem<T>(key:string):T|null{
     const data=localStorage.getItem(key)
     return data? JSON.parse(data):null;
 
