@@ -1,4 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import AuthReducer from '../../Features/AuthSlice'
+import { persistReducer, persistStore } from 'redux-persist'
+// import storage from "redux-persist/lib/storage";
+import UserReducer from '../../Features/UserSlice'
+import StaticReducer from '../../Features/StaticSlice'
+
+
+
 
 const storage = {
     getItem: (key:any) => Promise.resolve(localStorage.getItem(key)),
@@ -6,4 +14,32 @@ const storage = {
     removeItem: (key:any) => Promise.resolve(localStorage.removeItem(key)),
 }
 
-export const store=configureStore({})
+const persistConfig = {
+    key: 'root',
+    version: 1,
+    storage
+}
+
+const rootReducer = combineReducers({
+    auth: AuthReducer,
+    users:UserReducer,
+    static:StaticReducer,
+})
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"]
+            }
+        })
+})
+
+export const persistor=persistStore(store)
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+
