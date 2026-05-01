@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { PenLine } from 'lucide-react'
 import { Editor } from '@tinymce/tinymce-react'
 import { useAppDispatch, useAppSlector } from '@/App/Store/Hooks'
@@ -18,6 +18,10 @@ function Static() {
     setTempContent(terms)
     SetEditing(true)
   }
+  const config = import.meta.env
+  console.log(config);
+  
+
 
   const handleSubmit = () => {
     dispatch(updateTerms(tempcontent))
@@ -84,22 +88,14 @@ function Static() {
             {Editing && (
               <div className='mt-5'>
                 <Editor
-                  apiKey='mbdls13adio878c0mpm5l3jowwy3hpv0qi1mjjn1erdbkb4l'
+                  apiKey={config.VITE_API_KEY}
                   value={tempcontent}
-                  
+
                   onEditorChange={(content) => setTempContent(content)}
                   init={{
                     height: 500,
                     menubar: true,
-                    plugins: [
-                      "advlist autolink lists link image charmap preview anchor",
-                      "searchreplace visualblocks code fullscreen",
-                      "insertdatetime media table code help wordcount",
-                      "emoticons",
-                      "codesample",
-                      "directionality"
-                    ],
-
+                    plugins: "advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table code help wordcount emoticons codesample directionality",
                     toolbar: `
                          undo redo |
                          formatselect fontfamily fontsize |
