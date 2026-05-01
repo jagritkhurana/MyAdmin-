@@ -1,10 +1,10 @@
-import React from 'react'
+
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { getItem, setItem } from '../../Utilities/Items'
-import OTP from '../../../Components/Auth/OTP/OTP'
+
 
 function Resetpass() {
 
