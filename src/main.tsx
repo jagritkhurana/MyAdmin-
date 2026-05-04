@@ -27,6 +27,7 @@ import Protected from './Protected.tsx'
 import { persistor, store } from './App/Store/Store.ts'
 import { PersistGate } from 'redux-persist/integration/react'
 import Truck from './Components/TruckManagement/Truck.tsx'
+import {Auth0Provider} from "@auth0/auth0-react"
 
 const router = createBrowserRouter([
   {
@@ -98,14 +99,25 @@ const router = createBrowserRouter([
   }
 ])
 
-
+ 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <Auth0Provider domain='dev-nn4i6uvjqub1htv2.us.auth0.com'
+    clientId='NShF7jKLdZOmnEP0oZLNLQs0pz4IPJgb'
+    authorizationParams={{
+      redirect_uri:"http://localhost:5173/Home",
+      prompt: "login"
+      
+    }}
+     cacheLocation="localstorage"
+     useRefreshTokens={true}
+    >
     <Provider store={store} >
       <PersistGate loading={null} persistor={persistor}>
         <RouterProvider router={router} />
         <Toaster />
       </PersistGate>
     </Provider>
+    </Auth0Provider>
   </StrictMode>,
 )

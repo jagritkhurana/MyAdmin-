@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '@/App/Store/Hooks'
 import { logout } from '@/Features/AuthSlice'
 import { useLocation } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
 
 function Header() {
 
@@ -12,6 +13,7 @@ function Header() {
   const dispatch=useAppDispatch()
   const location=useLocation()
   const[openLogout,setopenLogout]=useState(false)
+  const{user,logout:Auth0logout,isAuthenticated}=useAuth0()
 
   const routeTitles:any={
     "/Home":"Dashboard",
@@ -69,9 +71,20 @@ function Header() {
               <div className='flex gap-3 mt-4 justify-center items-center'>
                 <button className='px-3 py-1 rounded-lg bg-red-500 border border-red-500 hover:cursor-pointer'
                 onClick={()=>{
+                  console.log(user)
                   dispatch(logout())
+                  
                   localStorage.clear()
+                  if(isAuthenticated){
+                    Auth0logout({
+                    logoutParams:{
+                      returnTo:window.location.origin +'/Login',
+                      
+                    }
+                  })
+                  }else{
                   navigate('/Login')
+                  }
                   
                 }}
                 >

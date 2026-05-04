@@ -1,12 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Mail, Eye, EyeOff } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '@/App/Store/Hooks'
 import { login } from '@/Features/AuthSlice'
 import { getItem, setItem } from '../../Utilities/Items'
 import toast from 'react-hot-toast'
+import { useAuth0 } from '@auth0/auth0-react'
 
 function Login() {
+
+  const {user:Auth0User,isAuthenticated,loginWithRedirect,isLoading}=useAuth0()
 
   const dispacth = useAppDispatch();
   const [email, setemail] = useState("")
@@ -20,16 +23,28 @@ function Login() {
     password: string,
   }
 
+  useEffect(()=>{
+      if(!isLoading&&isAuthenticated&&Auth0User?.email){
+        dispacth(login({
+          email:Auth0User.email,
+          UserType:"User"
+        }))
+        navigate("/Home")
+      }
+    },[isAuthenticated,Auth0User])
+
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     let users = getItem<user[]>("users");
 
-
+    
+ 
 
     if (!users) {
       users = [
-        { email: "user@gmail.com", password: "1234" },
+        { email: "user@gmail.com", password: "1234" },  
         { email: "admin@gmail.com", password: "1234" }
       ]
       setItem("users", users)
@@ -111,6 +126,26 @@ function Login() {
               <div className='md:w-75 max-w-md mt-15'>
                 <button className='text-xl text-white p-2 bg-blue-600 rounded-full max-w-md w-full hover:cursor-pointer'>Login</button>
               </div>
+              {
+                !isAuthenticated&&(
+                  <div className=' relative flex gap-4 mt-5 justify-center items-center flex-col'>
+                    <p className='font-bold text-xl opacity-80'> OR </p>
+                    <div className='flex border w-full max-w-md rounded-xl  '>
+                       <img src="https://cdn-icons-png.flaticon.com/128/281/281764.png" className='w-8 h-8 mt-2 ml-2' />
+
+                    <button className='p-3 rounded-xl hover:cursor-pointer  font-semibold w-full max-w-md'
+                    type='button'
+                    onClick={()=> loginWithRedirect()}
+                    >
+                     
+                      Countinue with Google
+                    </button>
+                    </div>
+
+
+                  </div>
+                )
+              }
 
             </div>
           </div>
