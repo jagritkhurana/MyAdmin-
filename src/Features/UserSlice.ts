@@ -13,8 +13,8 @@ export type user={
         type:string,
         number:string
     }[],
-
 }
+
 type userState={
     users:user[]
 }
