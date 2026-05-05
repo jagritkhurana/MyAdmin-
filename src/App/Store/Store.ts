@@ -4,7 +4,7 @@ import { persistReducer, persistStore } from 'redux-persist'
 // import storage from "redux-persist/lib/storage";
 import UserReducer from '../../Features/UserSlice'
 import StaticReducer from '../../Features/StaticSlice'
-
+import NotiReducer from '../../Features/NotiSlice'
 
 
 
@@ -24,6 +24,8 @@ const rootReducer = combineReducers({
     auth: AuthReducer,
     users:UserReducer,
     static:StaticReducer,
+    noti:NotiReducer
+
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
