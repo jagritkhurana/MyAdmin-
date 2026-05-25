@@ -3,7 +3,7 @@
 function MasterData() {
   return (
     <div>
-      
+      heyy master data
     </div>
   )
 }
