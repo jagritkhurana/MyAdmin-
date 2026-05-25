@@ -15,7 +15,7 @@ function Sidebar() {
                 </div>
 
                 <div >
-                    <ul className='flex flex-col gap-2'>
+                    <ul className='flex flex-col gap-5'>
                         <li >
                             <NavLink to='/Home' >
                                 {({ isActive }) => (
@@ -94,7 +94,7 @@ function Sidebar() {
                         <li >
                             <NavLink to='/Support' >
                                 {({ isActive }) => (
-                                    <div className={`flex items-center gap-3 p-2  px-4 ${isActive ? "bg-white text-blue-700" : "text-white hover:bg-blue-500"} `}
+                                    <div className={`flex items-center gap-3 p-2  px-4  ${isActive ? "bg-white text-blue-700" : "text-white hover:bg-blue-500"} `}
                                     >
                                         <img
                                             src={isActive ?
@@ -105,7 +105,7 @@ function Sidebar() {
                                             className='w-5 h-5'
 
                                         />
-                                        <p className='text-sm'>Support & Queries Management</p>
+                                        <p className='text-sm '>Support & Queries Management</p>
                                     </div>
                                 )}
 
@@ -166,7 +166,7 @@ function Sidebar() {
                             </NavLink>
 
                         </li>
-                        <li >
+                        {/* <li >
                             <NavLink to='/Subscription' >
                                 {({ isActive }) => (
                                     <div className={`flex items-center gap-3 p-2  px-4 ${isActive ? "bg-white text-blue-700" : "text-white hover:bg-blue-500"} `}
@@ -190,8 +190,8 @@ function Sidebar() {
 
                             </NavLink>
 
-                        </li>
-                        <li >
+                        </li> */}
+                        {/* <li >
                             <NavLink to='/Transaction' >
                                 {({ isActive }) => (
                                     <div className={`flex items-center gap-3 p-2  px-4 ${isActive ? "bg-white text-blue-700" : "text-white hover:bg-blue-500"} `}
@@ -215,8 +215,8 @@ function Sidebar() {
 
                             </NavLink>
 
-                        </li>
-                        <li >
+                        </li> */}
+                        {/* <li >
                             <NavLink to='/MasterData' >
                                 {({ isActive }) => (
                                     <div className={`flex items-center gap-3 p-2  px-4 ${isActive ? "bg-white text-blue-700" : "text-white hover:bg-blue-500"} `}
@@ -240,7 +240,7 @@ function Sidebar() {
 
                             </NavLink>
 
-                        </li>
+                        </li> */}
                         
 
                     </ul>
