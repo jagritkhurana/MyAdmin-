@@ -105,7 +105,7 @@ createRoot(document.getElementById('root')!).render(
     <Auth0Provider domain='dev-nn4i6uvjqub1htv2.us.auth0.com'
     clientId='NShF7jKLdZOmnEP0oZLNLQs0pz4IPJgb'
     authorizationParams={{
-      redirect_uri:"http://localhost:5173/Home",
+      redirect_uri: window.location.origin + "/Home",
       prompt: "login"
       
     }}
